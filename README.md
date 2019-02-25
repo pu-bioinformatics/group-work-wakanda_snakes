@@ -1,3 +1,3 @@
-## Update this README to reflect the content of your project. 
+## Update this README to reflect the content of the assignment 
 
-### The project details will be added by the end of the week
+In the assignment, you are required to write a python script that generates random DNA sequences in FASTA format. Given the number of DNA sequences and the length of each sequence, the script should write to file the sequences in FASTA format. 
