@@ -1,7 +1,7 @@
 #! /usr/bin/python
 
 """
-This script is used to generate random DNA sequences of length not more than 80 nucleotides. 
+This script is used to generate random DNA sequences of length 80 nucleotides in a line. 
 The input arguments ;
   noSeqs: The user inputs the number sequences to be generated
   lenSeq: The user inputs the length of sequences to be generated
@@ -17,19 +17,27 @@ def wakandaSnakes (noSeqs,lenSeq,outfile):
     """
     Generates random DNA sequences in fasta format 
     """
-    out = "../DATA/" + outfile
-    if int(lenSeq) <=80: #To limit length of sequence
-        with open (out, "w") as myfile:
-            for i in range (1,noSeqs+1):
-                header=">"+"snake_sequence"+str(i)  #fasta format header
-                myfile.write("%s\n" %header) #write header to new file
-                DNA=""                       #empty DNA string
-                for c in range (lenSeq):
-                    DNA+=choice("ATGC")     #defines contents of sequence and generates random sequences using choice 
-                myfile.write("%s\n" %DNA)
-    else:
-        print ("Length of sequence is longer than 80 nucleotides")
-
+    out = "../Data/" + outfile
+   
+    with open (out, "w") as myfile:
+        count = 0                   #Initialize counter
+        for i in range (1,noSeqs+1):
+            header=">"+"snake_sequence"+str(i)  #fasta format header
+            myfile.write("%s \n" %header) #write header to new file
+            DNA=""
+            for c in range (lenSeq):
+                DNA+=choice("ATGC")
+            for i in DNA: 
+                count += 1 # add one to counter for every character in DNA
+                if count <= 80: # Each line should not exceed 80 characters
+                    myfile.write("%s" %i)
+                else:
+                    myfile.write("\n")
+                    myfile.write("%s" %i) #This will account the lost nucleotide after introducing a new line  
+                    count = 1             #Note:if we dont specifically print this character, it is replaced by a new line character
+            count = 0                     #Intialize the counter back to 0 for another loop with a new seq
+            myfile.write("\n")            #Print the new line of the next sequence 
+                
 
 noSeqs=int(sys.argv[1])
 lenSeq=int(sys.argv[2])
