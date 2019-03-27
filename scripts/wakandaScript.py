@@ -17,6 +17,7 @@ def wakandaSnakes (noSeqs,lenSeq,outfile):
     """
     Generates random DNA sequences in fasta format 
     """
+<<<<<<< HEAD
     out = "../Data/" + outfile
    
     with open (out, "w") as myfile:
@@ -38,6 +39,22 @@ def wakandaSnakes (noSeqs,lenSeq,outfile):
             count = 0                     #Intialize the counter back to 0 for another loop with a new seq
             myfile.write("\n")            #Print the new line of the next sequence 
                 
+=======
+    
+    out = '../Data/'+outfile
+    if int(lenSeq) <=80: #To limit length of sequence
+        with open (out, "w") as myfile:
+            for i in range (1,noSeqs+1):
+                header=">"+"snake_sequence"+str(i)  #fasta format header
+                myfile.write("%s\n" %header) #write header to new file
+                DNA=""                       #empty DNA string
+                for c in range (lenSeq):
+                    DNA+=choice("ATGC")     #defines contents of sequence and generates random sequences using choice 
+                myfile.write("%s\n" %DNA)
+    else:
+        print ("Length of sequence is longer than 80 nucleotides")
+
+>>>>>>> 516fde1b9acab5162659545941ac4ebca3c1b912
 
 noSeqs=int(sys.argv[1])
 lenSeq=int(sys.argv[2])
